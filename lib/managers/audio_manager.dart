@@ -93,3 +93,69 @@ class AudioManager {
       }
     }
   }
+
+  /// Set music volume (0.0 - 1.0)
+  void setMusicVolume(double volume) {
+    _musicVolume = volume.clamp(0.0, 1.0);
+    try {
+      FlameAudio.bgm.audioPlayer.setVolume(_musicVolume);
+    } catch (e) {
+      print('Error setting music volume: $e');
+    }
+  }
+
+  /// Set sound effects volume (0.0 - 1.0)
+  void setSfxVolume(double volume) {
+    _sfxVolume = volume.clamp(0.0, 1.0);
+  }
+
+  /// Toggle music on/off
+  void toggleMusic() {
+    _isMusicEnabled = !_isMusicEnabled;
+    if (_isMusicEnabled) {
+      resumeBackgroundMusic();
+    } else {
+      pauseBackgroundMusic();
+    }
+  }
+
+  /// Toggle sound effects on/off
+  void toggleSfx() {
+    _isSfxEnabled = !_isSfxEnabled;
+  }
+
+  /// Enable music
+  void enableMusic() {
+    if (!_isMusicEnabled) {
+      _isMusicEnabled = true;
+      resumeBackgroundMusic();
+    }
+  }
+
+  /// Disable music
+  void disableMusic() {
+    if (_isMusicEnabled) {
+      _isMusicEnabled = false;
+      pauseBackgroundMusic();
+    }
+  }
+
+  /// Enable sound effects
+  void enableSfx() {
+    _isSfxEnabled = true;
+  }
+
+  /// Disable sound effects
+  void disableSfx() {
+    _isSfxEnabled = false;
+  }
+
+  /// Cleanup and dispose audio resources
+  void dispose() {
+    try {
+      FlameAudio.bgm.dispose();
+    } catch (e) {
+      print('Error disposing audio: $e');
+    }
+  }
+}
