@@ -1,3 +1,5 @@
+import 'package:flame_audio/flame_audio.dart'; // <--- Baris ini yang sebelumnya kurang
+
 class AudioManager {
   // Singleton pattern
   static final AudioManager _instance = AudioManager._internal();
@@ -51,7 +53,7 @@ class AudioManager {
     }
   }
 
-    /// Pause background music
+  /// Pause background music
   void pauseBackgroundMusic() {
     try {
       FlameAudio.bgm.pause();
