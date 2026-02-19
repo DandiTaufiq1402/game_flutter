@@ -50,4 +50,23 @@ class AudioManager {
       print('Error stopping background music: $e');
     }
   }
-    
+
+    /// Pause background music
+  void pauseBackgroundMusic() {
+    try {
+      FlameAudio.bgm.pause();
+    } catch (e) {
+      print('Error pausing background music: $e');
+    }
+  }
+
+  /// Resume background music
+  void resumeBackgroundMusic() {
+    if (_isMusicEnabled) {
+      try {
+        FlameAudio.bgm.resume();
+      } catch (e) {
+        print('Error resuming background music: $e');
+      }
+    }
+  }
